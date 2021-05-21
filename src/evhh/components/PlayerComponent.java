@@ -6,6 +6,7 @@ import evhh.controller.InputManager.UserInputManager;
 import evhh.model.ControllableComponent;
 import evhh.model.GameComponent;
 import evhh.model.GameObject;
+import evhh.model.gamecomponents.AudioComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class PlayerComponent extends ControllableComponent
     private  int upKeyCode,downKeyCode,rightKeyCode, leftKeyCode;
     private transient KeyboardInput keyboardInput;
     private  MarkComponent mark = null,newMark = null;
+    private AudioComponent audioComponent;
     public PlayerComponent(GameObject parent,UserInputManager uIM,int upKeyCode, int downKeyCode, int rightKeyCode, int leftKeyCode)
     {
         super(parent,uIM);
@@ -94,6 +96,8 @@ public class PlayerComponent extends ControllableComponent
     }
     private void move(int x, int y)
     {
+        if(audioComponent!=null)
+            audioComponent.play(0);
         synchronized (this)
         {
             parent.setPosition(x, y);
@@ -118,6 +122,16 @@ public class PlayerComponent extends ControllableComponent
         map.put(leftKeyCode,KeyEvent.KEY_PRESSED);
         keyboardInput = new KeyboardInput(keyInputEvent,map);
         uIM.addKeyInput(keyboardInput);
+    }
+
+    public AudioComponent getAudioComponent()
+    {
+        return audioComponent;
+    }
+
+    public void setAudioComponent(AudioComponent audioComponent)
+    {
+        this.audioComponent = audioComponent;
     }
 
     @Override

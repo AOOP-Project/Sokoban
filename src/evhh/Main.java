@@ -13,6 +13,7 @@ import evhh.prefabs.CratePrefab;
 import evhh.prefabs.MarkPrefab;
 import evhh.prefabs.PlayerPrefab;
 import evhh.prefabs.WallPrefab;
+import evhh.view.audio.AudioListener;
 import evhh.view.renderers.FrameRenderer;
 import evhh.view.renderers.GameFrame;
 
@@ -124,6 +125,7 @@ public class Main
         game1.setUpdateTimer(TIMER_DELAY);
         game1.loadTextureAssets(ASSET_PATH + "\\Textures");
         game1.getFrameRenderer().setGridBackgroundImage(ImageTiler.tileImage(game1.getTexture("blank"),DEFAULT_GRID_WIDTH,DEFAULT_GRID_HEIGHT));
+        game1.getFrameRenderer().setAudioListener(new AudioListener());
 
 
         BufferedImage tiled =  ImageTiler.tileImage(game1.getTexture("blank"), DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
@@ -160,6 +162,10 @@ public class Main
                 KeyEvent.VK_S,
                 KeyEvent.VK_D,
                 KeyEvent.VK_A);
+        File[] audioFilesPlayer = new File[1];
+        audioFilesPlayer[0] = new File(System.getProperty("user.dir") + "/Assets/AudioAssets/Step.wav");
+        playerPrefab.addStepSound(game1.getFrameRenderer().getAudioListener(),audioFilesPlayer);
+
         playerPrefab2 = new PlayerPrefab(
                 game1.getTexture("player"),
                 "player",

@@ -5,8 +5,11 @@ import evhh.controller.InputManager.UserInputManager;
 import evhh.model.GameObject;
 import evhh.model.Grid;
 import evhh.model.ObjectPrefab;
+import evhh.model.gamecomponents.AudioComponent;
+import evhh.view.audio.AudioListener;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 /***********************************************************************************************************************
  * @project: AOOP_Project_Sokoban
@@ -24,6 +27,8 @@ public class PlayerPrefab extends ObjectPrefab
     , downKeyCode
     , rightKeyCode
     , leftKeyCode;
+    AudioListener audioListener;
+    File[] audioFiles;
     public PlayerPrefab(BufferedImage texture,
                         String textureRef,
                         int id,
@@ -45,8 +50,21 @@ public class PlayerPrefab extends ObjectPrefab
     public GameObject getInstance(Grid grid, int x, int y)
     {
         GameObject instance = super.getInstance(grid, x, y);
-        instance.addComponent(new PlayerComponent(instance, uIM,upKeyCode,downKeyCode,rightKeyCode,leftKeyCode));
+        PlayerComponent pc = new PlayerComponent(instance, uIM,upKeyCode,downKeyCode,rightKeyCode,leftKeyCode);
+        if(audioListener !=null && audioFiles !=null)
+        {
+            AudioComponent ac = new AudioComponent(instance,audioListener,audioFiles);
+            pc.setAudioComponent(ac);
+            instance.addComponent(ac);
+        }
+        instance.addComponent(pc);
         instance.setCreator(this);
+
         return instance;
+    }
+    public void addStepSound(AudioListener audioListener, File[] audioFiles)
+    {
+        this.audioListener = audioListener;
+        this.audioFiles = audioFiles;
     }
 }
