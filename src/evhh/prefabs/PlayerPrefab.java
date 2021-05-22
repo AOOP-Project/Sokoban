@@ -27,8 +27,8 @@ public class PlayerPrefab extends ObjectPrefab
     , downKeyCode
     , rightKeyCode
     , leftKeyCode;
-    AudioListener audioListener;
-    File[] audioFiles;
+    private AudioListener audioListener;
+    private File[] audioFiles;
     public PlayerPrefab(BufferedImage texture,
                         String textureRef,
                         int id,
