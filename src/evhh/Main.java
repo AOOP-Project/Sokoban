@@ -40,8 +40,8 @@ public class Main
     public static final int DEFAULT_GRID_WIDTH = 16;
     public static final int DEFAULT_GRID_HEIGHT = 16;
     public static final int DEFAULT_CELL_SIZE = 32;
-    public static final String GRID_SAVE_PATH = System.getProperty("user.dir") + "\\SavedData\\SavedGrids\\";
-    public static final String ASSET_PATH = System.getProperty("user.dir") + "\\Assets";
+    public static final String GRID_SAVE_PATH = System.getProperty("user.dir") + "/SavedData/SavedGrids/";
+    public static final String ASSET_PATH = System.getProperty("user.dir") + "/Assets";
     public static final int TIMER_DELAY = 1000 / 60;
 
     private static GameInstance game1;
@@ -123,7 +123,8 @@ public class Main
         game1.setUserInputManager(userInputManager);
         game1.addRendererTimer(TIMER_DELAY);
         game1.setUpdateTimer(TIMER_DELAY);
-        game1.loadTextureAssets(ASSET_PATH + "\\Textures");
+
+        game1.loadTextureAssets(ASSET_PATH + "/Textures");
         game1.getFrameRenderer().setGridBackgroundImage(ImageTiler.tileImage(game1.getTexture("blank"),DEFAULT_GRID_WIDTH,DEFAULT_GRID_HEIGHT));
         game1.getFrameRenderer().setAudioListener(new AudioListener());
 
